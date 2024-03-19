@@ -3,6 +3,7 @@ import random
 class RandomPlayer:
   def __init__(self, playerSymbol):
     self.playerSymbol = playerSymbol
+    self.name = "Random Player"
 
   def nextMove(self, ttt):
     available = ttt.availablePositions()

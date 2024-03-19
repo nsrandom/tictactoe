@@ -2,6 +2,7 @@ import random
 
 class HeuristicPlayer:
   def __init__(self, playerSymbol):
+    self.name = "Heuristic Player"
     self.playerSymbol = playerSymbol
 
   def nextMove(self, ttt):

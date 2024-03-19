@@ -74,14 +74,21 @@ class Arena():
 # p2 = RandomPlayer(playerSymbol=-1)
 
 # Random vs ReinforcementLearning player
-#   p1 wins 6.5%, p2 wins 69%, 24.5% are ties
 # p1 = RandomPlayer(playerSymbol=1)
 # p2 = RLPlayer(playerSymbol=-1)
 # p2 = RLPlayer(playerSymbol=-1, verbose=True)
 
+# ReinforcementLearning vs Random player
+# p1 = RLPlayer(playerSymbol=1)
+# p2 = RandomPlayer(playerSymbol=-1)
+
 # Heuristic vs ReinforcementLearning player
 # p1 = HeuristicPlayer(playerSymbol=1)
 # p2 = RLPlayer(playerSymbol=-1)
+
+# ReinforcementLearning vs Heuristic player
+# p1 = RLPlayer(playerSymbol=1)
+# p2 = HeuristicPlayer(playerSymbol=-1)
 
 # ReinforcementLearning vs ReinforcementLearning player
 p1 = RLPlayer(playerSymbol=1)
@@ -90,20 +97,22 @@ p2 = RLPlayer(playerSymbol=-1)
 arena = Arena(p1, p2)
 # arena.fightVerbose()
 
-(p1_wins, p2_wins, ties) = arena.fight(iterations=10000)
-p2.savePlayerModel()
+for i in range(5):
+  (p1_wins, p2_wins, ties) = arena.fight(iterations=10000)
+  if isinstance(p1, RLPlayer):
+    p1.savePlayerModel()
+  if isinstance(p2, RLPlayer):
+    p2.savePlayerModel()
 
-total = p1_wins + p2_wins + ties
-print(f"Cumulative: ({total})")
-print(f"  P1 wins: {p1_wins/total*100: .2f}%")
-print(f"  P2 wins: {p2_wins/total*100: .2f}%")
-print(f"  Ties: {ties/total*100: .2f}%")
+  total = p1_wins + p2_wins + ties
+  print(f"After iteration {i+1}:")
+  print(f"  P1 ({p1.name}) wins: {p1_wins/total*100: .2f}%")
+  print(f"  P2 ({p2.name}) wins: {p2_wins/total*100: .2f}%")
+  print(f"  Ties: {ties/total*100: .2f}%")
 
-total = 1000
-(p1_wins, p2_wins, ties) = arena.last_n_stats(n=total)
-print(f"In last {total} iterations:")
-print(f"  P1 wins: {p1_wins/total*100: .2f}%")
-print(f"  P2 wins: {p2_wins/total*100: .2f}%")
-print(f"  Ties: {ties/total*100: .2f}%")
-
-print(len(p2.state_values.keys()))
+# total = 1000
+# (p1_wins, p2_wins, ties) = arena.last_n_stats(n=total)
+# print(f"In last {total} iterations:")
+# print(f"  P1 ({p1.name}) wins: {p1_wins/total*100: .2f}%")
+# print(f"  P2 ({p2.name}) wins: {p2_wins/total*100: .2f}%")
+# print(f"  Ties: {ties/total*100: .2f}%")
