@@ -83,22 +83,22 @@ class Arena():
 # p2 = RandomPlayer(playerSymbol=-1)
 
 # Heuristic vs ReinforcementLearning player
-# p1 = HeuristicPlayer(playerSymbol=1)
-# p2 = RLPlayer(playerSymbol=-1)
+p1 = HeuristicPlayer(playerSymbol=1)
+p2 = RLPlayer(playerSymbol=-1, exp_rate=0.0)
 
 # ReinforcementLearning vs Heuristic player
 # p1 = RLPlayer(playerSymbol=1)
 # p2 = HeuristicPlayer(playerSymbol=-1)
 
 # ReinforcementLearning vs ReinforcementLearning player
-p1 = RLPlayer(playerSymbol=1)
-p2 = RLPlayer(playerSymbol=-1)
+# p1 = RLPlayer(playerSymbol=1, exp_rate=0.0)
+# p2 = RLPlayer(playerSymbol=-1, exp_rate=0.0)
 
 arena = Arena(p1, p2)
 # arena.fightVerbose()
 
 for i in range(5):
-  (p1_wins, p2_wins, ties) = arena.fight(iterations=10000)
+  (p1_wins, p2_wins, ties) = arena.fight(iterations=1000)
   if isinstance(p1, RLPlayer):
     p1.savePlayerModel()
   if isinstance(p2, RLPlayer):
